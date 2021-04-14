@@ -1,3 +1,11 @@
 {
-  "pseudo": "JDoe"
+  "pseudo": "JDoe",
+  "full_name": "John Doe",
+  "picture": null,
+  "starred": [
+    "react",
+    "react",
+    "react",
+    "react"
+  ]
 }

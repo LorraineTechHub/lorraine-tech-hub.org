@@ -1,0 +1,11 @@
+.container {
+    max-width: 42rem;
+    padding: 0 1rem;
+    margin: 3rem auto 6rem;
+}
+
+.container_xl {
+    max-width: 84rem;
+    padding: 0 1rem;
+    margin: 3rem auto 6rem;
+}

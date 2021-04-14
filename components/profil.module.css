@@ -1,0 +1,28 @@
+.container__profile header {
+    display: flex;
+    flex-direction: column;
+}
+
+#profile_picture {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+#profile_summary {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 40px;
+}
+#profile_summary h1 {
+    margin-bottom: 0;
+}
+#profile_summary p {
+    margin-top: 0;
+    font-style: italic;
+}
+
+.profile_icon {
+    /*margin-left: 10px;*/
+}

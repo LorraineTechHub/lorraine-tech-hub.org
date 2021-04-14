@@ -2,6 +2,7 @@ import { useRouter } from 'next/router'
 import fs from 'fs'
 import { join } from 'path'
 import Layout from "../../components/layout";
+import Profil from "../../components/profil";
 
 function fetchProfiles() {
     return fs.readdirSync(join(process.cwd(), 'pages/profils/data'))
@@ -17,7 +18,7 @@ function SingleProfile({ profiles }) {
     
     return (
         <Layout page_title={profile.pseudo}>
-            <p>Profil de : {profile.pseudo}</p>
+            <Profil profile={profile} />
         </Layout>
     )
 }
