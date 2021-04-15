@@ -1,192 +1,132 @@
 import Head from 'next/head'
+import Image from "next/image";
+import fs from "fs";
+import {join} from "path";
+import styles from "../components/profil.module.css";
 
-export default function Home() {
+function fetchProfiles() {
+  return fs.readdirSync(join(process.cwd(), 'pages/profils/data'))
+      .map(file => fs.readFileSync('pages/profils/data/' + file, 'utf8'))
+      .map(content => JSON.parse(content))
+}
+
+export async function getStaticProps() {
+  const profiles = fetchProfiles()
+
+  return {props: {profiles}}
+}
+
+export default function Home({ profiles }) {
   return (
-    <div className="container">
+    <div className="container_xl">
       <Head>
-        <title>Create Next App</title>
+        <title>Lorraine Tech Hub</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main>
-        <h1 className="title">
-          Salut à <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
+        <div id='logo_main'>
+          <Image
+              src="/images/lorraine_tech_hub.png"
+              height={85}
+              width={85}
+              alt="logo Lorraine Tech Hub"
+          />
+          <h1 className="title">Lorraine Tech Hub</h1>
+        </div>
+        
         <p className="description">
-          Get started by editing <code>pages/index.js</code>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam nec dui. Quisque nec mauris sit amet elit iaculis pretium sit amet quis magna. Aenean velit odio.
         </p>
+        
+        <div id='socials_main'>
+          <div>
+            <a href="#" target="_blank" rel="noopener noreferrer" className='social_link'>
+              <Image
+                  className='social_link_image'
+                  src="/images/discord_logo.svg"
+                  height={30}
+                  width={100}
+                  alt="Discord Logo"
+              />
+            </a>
+          </div>
 
-        <div className="grid">
-          <a href="https://nextjs.org/docs" className="card">
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
+          <div>
+            <a href="#" target="_blank" rel="noopener noreferrer" className='social_link'>
+              <Image
+                  src="/images/github_logo.png"
+                  height={29}
+                  width={96}
+                  alt="Github Logo"
+              />
+            </a>            
+          </div>
 
-          <a href="https://nextjs.org/learn" className="card">
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
+        </div>
 
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className="card"
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="card"
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+        <div id='content' className="grid">
+          {profiles.map((profile) => (
+            <div>
+                <Image
+                    src='/images/placeholder-image.jpg'
+                    height={150}
+                    width={200}
+                    alt="profile"
+                />
+                <p>@{profile.pseudo}</p>
+              </div>
+          ))}
         </div>
       </main>
 
       <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="logo" />
-        </a>
+
       </footer>
 
       <style jsx>{`
-        .container {
-          min-height: 100vh;
-          padding: 0 0.5rem;
+        #logo_main {
           display: flex;
-          flex-direction: column;
-          justify-content: center;
+          margin-bottom: 80px;
+        }
+        
+        #logo_main h1 {
+          margin-left 20px;
+        }
+  
+        #socials_main {
+          display:flex;
           align-items: center;
+          align-content: center;
+          margin-bottom:80px;
         }
-
-        main {
-          padding: 5rem 0;
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
+        
+        #socials_main>div {
+          margin-right:20px;
         }
-
-        footer {
-          width: 100%;
-          height: 100px;
-          border-top: 1px solid #eaeaea;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        footer img {
-          margin-left: 0.5rem;
-        }
-
-        footer a {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        a {
-          color: inherit;
-          text-decoration: none;
-        }
-
-        .title a {
-          color: #0070f3;
-          text-decoration: none;
-        }
-
-        .title a:hover,
-        .title a:focus,
-        .title a:active {
-          text-decoration: underline;
-        }
-
-        .title {
-          margin: 0;
-          line-height: 1.15;
-          font-size: 4rem;
-        }
-
-        .title,
+  
         .description {
-          text-align: center;
+          max-width: 55%;
         }
 
-        .description {
-          line-height: 1.5;
-          font-size: 1.5rem;
+        .container_xl {
+            background: url('/images/lorraine.png') no-repeat top right;
+            background-size: 55%;
+            max-width: 84rem;
+            padding: 0 1rem;
+            margin: 3rem auto 6rem;
+            min-height: 800px;
         }
-
-        code {
-          background: #fafafa;
-          border-radius: 5px;
-          padding: 0.75rem;
-          font-size: 1.1rem;
-          font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-            DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+        
+        #content {
+          display:flex;
+          justify-content: flex-start;
+          border-top: 1px solid grey;
+          padding-top:80px;
+          text-align: center
         }
-
-        .grid {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-wrap: wrap;
-
-          max-width: 800px;
-          margin-top: 3rem;
-        }
-
-        .card {
-          margin: 1rem;
-          flex-basis: 45%;
-          padding: 1.5rem;
-          text-align: left;
-          color: inherit;
-          text-decoration: none;
-          border: 1px solid #eaeaea;
-          border-radius: 10px;
-          transition: color 0.15s ease, border-color 0.15s ease;
-        }
-
-        .card:hover,
-        .card:focus,
-        .card:active {
-          color: #0070f3;
-          border-color: #0070f3;
-        }
-
-        .card h3 {
-          margin: 0 0 1rem 0;
-          font-size: 1.5rem;
-        }
-
-        .card p {
-          margin: 0;
-          font-size: 1.25rem;
-          line-height: 1.5;
-        }
-
-        .logo {
-          height: 1em;
-        }
-
-        @media (max-width: 600px) {
-          .grid {
-            width: 100%;
-            flex-direction: column;
-          }
+        #content>div {
+          margin-right:20px;
         }
       `}</style>
 
