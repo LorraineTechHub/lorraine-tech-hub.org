@@ -26,3 +26,21 @@
 .profile_icon {
     /*margin-left: 10px;*/
 }
+
+#interview_date {
+    font-style: italic;
+}
+.interview_topic {
+    margin-bottom: 40px;
+}
+.interview_topic_question {
+    font-weight: bold;
+}
+.interview_topic_response {
+    text-align: justify;
+}
+
+.container__profile footer {
+    font-size: 11px;
+    text-align: center;
+}

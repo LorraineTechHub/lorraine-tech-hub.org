@@ -33,7 +33,18 @@ export default function Profil({ profile }) {
                         ))}
                     </div>
                 </div>
+                <p id={styles.interview_date}>Interview du {profile.interview_date}</p>
             </header>
+            {profile.interview.map((topic) => (
+                <div className={styles.interview_topic}>
+                    <p className={styles.interview_topic_question}>{topic.question}</p>
+                    <p className={styles.interview_topic_response}>{topic.response}</p>
+                </div>
+            ))}
+            <footer>
+                <p>Inspiré par le travail d'Arnaud Becher sur https://elsass.dev</p>
+                <p>Retrouvez ces personnes sur le Discord Lorraine Tech Hub</p>
+            </footer>
         </section>
     )
 }
