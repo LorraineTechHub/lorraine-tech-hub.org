@@ -1,7 +1,7 @@
 import Image from 'next/image'
-import styles from './profil.module.css'
+import styles from './profile.module.css'
 
-export default function Profil({ profile }) {
+export default function Profile({ profile }) {
     
     const picture = null === profile.picture ? '/images/placeholder-image.jpg' : profile.picture
     

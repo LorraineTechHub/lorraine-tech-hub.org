@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import FetchAllProfiles from "../../lib/profile";
 import Layout from "../../components/layout";
-import Profil from "../../components/profil";
+import Profile from "../../components/profile";
 
 function SingleProfile({ profiles }) {
     const router = useRouter()
@@ -11,7 +11,7 @@ function SingleProfile({ profiles }) {
     
     return (
         <Layout page_title={profile.pseudo}>
-            <Profil profile={profile} />
+            <Profile profile={profile} />
         </Layout>
     )
 }
