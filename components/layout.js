@@ -13,12 +13,14 @@ export default function Layout({ children, page_title }) {
             <header className={styles.container_xl}>
                 {' '}
                 <Link href="/">
-                    <Image
-                        src="/images/lorraine_tech_hub.png"
-                        height={50}
-                        width={50}
-                        alt="logo Lorraine Tech Hub"
-                    />
+                    <a>
+                        <Image
+                            src="/images/lorraine_tech_hub.png"
+                            height={50}
+                            width={50}
+                            alt="logo Lorraine Tech Hub"
+                        />
+                    </a>
                 </Link>
             </header>
             <main className={styles.container}>
