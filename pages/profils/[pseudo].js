@@ -1,14 +1,7 @@
 import { useRouter } from 'next/router'
-import fs from 'fs'
-import { join } from 'path'
+import FetchAllProfiles from "../../lib/profile";
 import Layout from "../../components/layout";
 import Profil from "../../components/profil";
-
-function fetchProfiles() {
-    return fs.readdirSync(join(process.cwd(), 'pages/profils/data'))
-            .map(file => fs.readFileSync('pages/profils/data/' + file, 'utf8'))
-            .map(content => JSON.parse(content))
-}
 
 function SingleProfile({ profiles }) {
     const router = useRouter()
@@ -24,9 +17,7 @@ function SingleProfile({ profiles }) {
 }
 
 export async function getStaticPaths() {
-    const profiles = fetchProfiles()
-
-    const paths = profiles.map((profile) => ({
+    const paths = FetchAllProfiles().map((profile) => ({
         params: { pseudo: profile.pseudo },
     }))
 
@@ -34,7 +25,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps() {
-    const profiles = fetchProfiles()
+    const profiles = FetchAllProfiles()
 
     return {props: {profiles}}
 }

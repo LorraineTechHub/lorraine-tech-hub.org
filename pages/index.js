@@ -1,17 +1,10 @@
 import Head from 'next/head'
 import Image from "next/image";
-import fs from "fs";
-import {join} from "path";
-import styles from "../components/profil.module.css";
-
-function fetchProfiles() {
-  return fs.readdirSync(join(process.cwd(), 'pages/profils/data'))
-      .map(file => fs.readFileSync('pages/profils/data/' + file, 'utf8'))
-      .map(content => JSON.parse(content))
-}
+import FetchAllProfiles from "../lib/profile";
+import ProfileCard from "../components/profile-card";
 
 export async function getStaticProps() {
-  const profiles = fetchProfiles()
+  const profiles = FetchAllProfiles()
 
   return {props: {profiles}}
 }
@@ -67,15 +60,7 @@ export default function Home({ profiles }) {
 
         <div id='content' className="grid">
           {profiles.map((profile) => (
-            <div>
-                <Image
-                    src='/images/placeholder-image.jpg'
-                    height={150}
-                    width={200}
-                    alt="profile"
-                />
-                <p>@{profile.pseudo}</p>
-              </div>
+              <ProfileCard name={profile.pseudo} picture={'/images/placeholder-image.jpg'} />
           ))}
         </div>
       </main>
